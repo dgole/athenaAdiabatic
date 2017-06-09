@@ -1299,7 +1299,7 @@ void combine_densities(MeshS *pM)
 		koffset = koffset+2*nghost+pG->Nx[2];
 		}
 	#endif
-	}
+	};
   return;
 }
 
