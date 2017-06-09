@@ -16,7 +16,6 @@ module load intel impi
 
 # compile and configure the code
 cd ..
-./configure --with-problem=stratCoolingCosAD --enable-shearing-box --enable-fargo --with-eos=adiabatic --enable-mpi --enable-resistivity --enable-sts
 make clean
 ./configure --with-problem=stratCoolingCosAD --enable-shearing-box --enable-fargo --with-eos=adiabatic --enable-mpi --enable-resistivity --enable-sts
 make all 
