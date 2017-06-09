@@ -1117,7 +1117,7 @@ void Userwork_in_loop(MeshS *pM)
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
     /* calculate the horizontally averaged density profile */
-	density_profile(pM);
+		density_profile(pM);
     /* claculate the ionization rate profile */
     ionization_rate(pM);
     combine_densities(pM);
@@ -1237,7 +1237,7 @@ void Userwork_in_loop2(MeshS *pM)
 
 void combine_densities(MeshS *pM)
 {
-
+/*
 #ifdef MPI_PARALLEL
   int i,j,k,m,n,p;
   int is,ie,js,je,ks,ke;
@@ -1296,7 +1296,7 @@ void combine_densities(MeshS *pM)
   koffset = koffset+2*nghost+pG->Nx[2];
   }
 #endif
-
+*/
   return;
 }
 
