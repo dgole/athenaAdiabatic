@@ -1248,7 +1248,7 @@ void combine_densities(MeshS *pM)
   DomainS *pD;
   int ierr,myID_Comm_Domain;
 
-	nt++;
+	nt = nt+1;
 	if (nt % 10) == 0 {
 	// At level=0, there is only one domain 
 		pG = pM->Domain[0][0].Grid; 
@@ -1298,8 +1298,8 @@ void combine_densities(MeshS *pM)
 		  }
 		koffset = koffset+2*nghost+pG->Nx[2];
 		}
-	#endif
 	};
+#endif
   return;
 }
 
