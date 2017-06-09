@@ -134,7 +134,8 @@ static double ***ldens,***gdens;
 static int kbase1,kbase2;
 static int nxgrid,nygrid,nzgrid;
 static int gridnumx1,gridnumy1,gridnumz1;
-static int nt=0;
+static int nt = 1;
+
 
 
 /*=========================== PUBLIC FUNCTIONS =================================
@@ -1249,56 +1250,57 @@ void combine_densities(MeshS *pM)
   int ierr,myID_Comm_Domain;
 
 	nt = nt+1;
-	if (nt % 10) == 0 {
-	// At level=0, there is only one domain 
-		pG = pM->Domain[0][0].Grid; 
-		if (pG != NULL) {
-		  pD = (DomainS*)&(pM->Domain[0][0]);
-		}
 
-		is = pG->is; ie = pG->ie;
-		js = pG->js; je = pG->je;
-		ks = pG->ks; ke = pG->ke;
+// At level=0, there is only one domain 
+  pG = pM->Domain[0][0].Grid; 
+	if pG->
 
-		num_ldens = (pG->Nx[0]+2*nghost)*(pG->Nx[1]+2*nghost)*(pG->Nx[2]+2*nghost);
+  if (pG != NULL) {
+    pD = (DomainS*)&(pM->Domain[0][0]);
+  }
 
-		ierr = MPI_Comm_rank(pD->Comm_Domain, &myID_Comm_Domain);
-		if(ierr != MPI_SUCCESS)
-		  ath_error("[combine_densities]: MPI_Comm_rank error = %d\n",ierr);
+  is = pG->is; ie = pG->ie;
+  js = pG->js; je = pG->je;
+  ks = pG->ks; ke = pG->ke;
 
-	// Set up density array on each grid 
-		for (k=ks-nghost; k<=ke+nghost; k++) {
-		for (j=js-nghost; j<=je+nghost; j++) {
-		for (i=is-nghost; i<=ie+nghost; i++) {
-		    ldens[k][j][i] = pG->U[k][j][i].d;
-		}}}
+  num_ldens = (pG->Nx[0]+2*nghost)*(pG->Nx[1]+2*nghost)*(pG->Nx[2]+2*nghost);
 
-		ierr = MPI_Allgather(**ldens,num_ldens,MPI_DOUBLE,gdens1D,num_ldens,MPI_DOUBLE,pD->Comm_Domain);
-		if(ierr)
-		  ath_error("[combine_densities]: MPI_Allgather call returned error = %d\n",ierr);
+  ierr = MPI_Comm_rank(pD->Comm_Domain, &myID_Comm_Domain);
+  if(ierr != MPI_SUCCESS)
+    ath_error("[combine_densities]: MPI_Comm_rank error = %d\n",ierr);
 
-		count = 0;
-		koffset = 0;
-		for (p=0; p<=nzgrid-1; p++) {
-		  joffset = 0;
-		  for (n=0; n<=nygrid-1; n++) {
-		    ioffset = 0;
-		    for (m=0; m<=nxgrid-1; m++) {
+// Set up density array on each grid 
+  for (k=ks-nghost; k<=ke+nghost; k++) {
+  for (j=js-nghost; j<=je+nghost; j++) {
+  for (i=is-nghost; i<=ie+nghost; i++) {
+      ldens[k][j][i] = pG->U[k][j][i].d;
+  }}}
 
-		      for (k=ks-nghost; k<=ke+nghost; k++) {
-		      for (j=js-nghost; j<=je+nghost; j++) {
-		      for (i=is-nghost; i<=ie+nghost; i++) {
-		        count++;
-		        gdens[k+koffset][j+joffset][i+ioffset] = gdens1D[count];
-		      }}}
+  ierr = MPI_Allgather(**ldens,num_ldens,MPI_DOUBLE,gdens1D,num_ldens,MPI_DOUBLE,pD->Comm_Domain);
+  if(ierr)
+    ath_error("[combine_densities]: MPI_Allgather call returned error = %d\n",ierr);
 
-		      ioffset = ioffset+2*nghost+pG->Nx[0];
-		    }
-		  joffset = joffset+2*nghost+pG->Nx[1];
-		  }
-		koffset = koffset+2*nghost+pG->Nx[2];
-		}
-	};
+  count = 0;
+  koffset = 0;
+  for (p=0; p<=nzgrid-1; p++) {
+    joffset = 0;
+    for (n=0; n<=nygrid-1; n++) {
+      ioffset = 0;
+      for (m=0; m<=nxgrid-1; m++) {
+
+        for (k=ks-nghost; k<=ke+nghost; k++) {
+        for (j=js-nghost; j<=je+nghost; j++) {
+        for (i=is-nghost; i<=ie+nghost; i++) {
+          count++;
+          gdens[k+koffset][j+joffset][i+ioffset] = gdens1D[count];
+        }}}
+
+        ioffset = ioffset+2*nghost+pG->Nx[0];
+      }
+    joffset = joffset+2*nghost+pG->Nx[1];
+    }
+  koffset = koffset+2*nghost+pG->Nx[2];
+  }
 #endif
   return;
 }
