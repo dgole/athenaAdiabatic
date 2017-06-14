@@ -1096,7 +1096,7 @@ void Userwork_in_loop(MeshS *pM)
   Real mratio, press, temp;
 
 /* Enforce mass conservation */
-  mratio = mass_cons(pM);
+/*  mratio = mass_cons(pM);
 
   for (nl=0; nl<(pM->NLevels); nl++){
     for (nd=0; nd<(pM->DomainsPerLevel[nl]); nd++){
@@ -1114,7 +1114,7 @@ void Userwork_in_loop(MeshS *pM)
               //printf("%s %i %i %i %i %i %i \n",     "pG->ks pG->ke pG->js pG->je pG->is pG->ie", pG->ks, pG->ke, pG->js, pG->je, pG->is, pG->ie);
             }}}
   }}}
-
+*/
 #ifdef RESISTIVITY
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
