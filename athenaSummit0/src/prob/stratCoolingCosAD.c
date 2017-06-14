@@ -1122,7 +1122,7 @@ void Userwork_in_loop(MeshS *pM)
 		density_profile(pM);
     /* claculate the ionization rate profile */
     ionization_rate(pM);
-    combine_densities(pM);
+    //combine_densities(pM);
   }
 #endif
 
