@@ -33,22 +33,22 @@ num_domains     = 1          # number of Domains in Mesh
 
 <output1>
 out_fmt = hst                # History data dump
-dt      = 0.1
+dt      = 62.831853
 
 <output2>
 out_fmt = tab                # tab data dump
-dt      = 6.2831853
+dt      = 62.831853
 out = prim
 num = 0
 
 <output3>
 out_fmt = rst                # tab data dump
-dt      = 6.2831853               # time increment between outputs
+dt      = 62.831853               # time increment between outputs
 num = 0
 
 <output4>
 name = 1d                
-dt      = 0.62831853
+dt      = 62.831853
 num = 0
 
 
