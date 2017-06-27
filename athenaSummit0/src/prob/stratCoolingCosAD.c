@@ -1251,8 +1251,6 @@ void combine_densities(MeshS *pM)
   DomainS *pD;
   int ierr,myID_Comm_Domain;
 
-	nt = nt+1;
-
 // At level=0, there is only one domain 
   pG = pM->Domain[0][0].Grid; 
   if (pG != NULL) {
