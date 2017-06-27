@@ -1119,7 +1119,7 @@ void Userwork_in_loop(MeshS *pM)
 	printf("%s %i \n", "gridnumx1 is ", gridnumx1);
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
-		count1++;
+		count1 = count1 + 1;
 		if (count1 % 10 == 0) {
     	density_profile(pM);
     	ionization_rate(pM);
