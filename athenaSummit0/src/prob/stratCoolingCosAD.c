@@ -1116,6 +1116,7 @@ void Userwork_in_loop(MeshS *pM)
   }}}
 
 #ifdef RESISTIVITY
+	printf("%s %i \n", "gridnumx1 is ", gridnumx1);
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
 		count1++;

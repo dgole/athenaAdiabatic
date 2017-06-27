@@ -84,7 +84,7 @@ extern Real T0, tauCool, zq, Tmid, Tatm, delta;
 #endif
 extern int myID_Comm_world;
 extern Real d_MIN;
-extern int count1;
+//extern int count1;
 
 extern GravPotFun_t StaticGravPot;
 extern CoolingFun_t CoolingFunc;
