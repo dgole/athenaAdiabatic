@@ -177,6 +177,7 @@ void problem(DomainS *pDomain)
   T_FLOOR = par_getd("problem","tfloor");
 #endif //adiabatic
   d_MIN = 0.1*D_FLOOR;
+	count1 = 0;
 
 /* Read problem parameters.  Note Omega set to 10^{-3} by default */
 #ifdef ISOTHERMAL
