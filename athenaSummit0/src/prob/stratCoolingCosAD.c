@@ -134,7 +134,6 @@ static double ***ldens,***gdens;
 static int kbase1,kbase2;
 static int nxgrid,nygrid,nzgrid;
 static int gridnumx1,gridnumy1,gridnumz1;
-static int nt = 1;
 static int count1 = 0;
 
 
