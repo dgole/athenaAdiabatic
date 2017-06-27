@@ -1020,7 +1020,7 @@ void Userwork_before_loop(MeshS *pM)
     Sigma_top= (Real*)calloc_1d_array(mynz,sizeof(Real));
     Sigma_bot= (Real*)calloc_1d_array(mynz,sizeof(Real));
     ion_rate = (Real*)calloc_1d_array(mynz,sizeof(Real));
-
+	
     //printf("%s \n", "MARKER 7 inside Userwork_before_loop");
 /* calculate the horizontally averaged density profile */
     //printf("%i  marker in Userwork_before_loop before density_profile \n", myID_Comm_world);
@@ -1118,9 +1118,12 @@ void Userwork_in_loop(MeshS *pM)
 #ifdef RESISTIVITY
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
-    //density_profile(pM);
-    //ionization_rate(pM);
-    //combine_densities(pM);
+		count1++;
+		if (count1 % 10) == 0 {
+    	density_profile(pM);
+    	ionization_rate(pM);
+    	combine_densities(pM);
+		}
   }
 #endif
 
