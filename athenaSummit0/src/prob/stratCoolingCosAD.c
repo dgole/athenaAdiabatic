@@ -29,6 +29,8 @@
 #include <float.h>
 #include <math.h>
 
+#include <time.h>
+
 #include <stdlib.h>
 #include <string.h>
 #include "defs.h"
@@ -1120,9 +1122,28 @@ void Userwork_in_loop(MeshS *pM)
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
 		count1 = count1 + 1;
 		if (count1 % 10 == 0) {
-    	density_profile(pM);
-    	ionization_rate(pM);
-    	combine_densities(pM);
+
+			clock_t start = clock(), diff;
+			density_profile(pM);
+			diff = clock() - start;
+			int msec = diff * 1000 / CLOCKS_PER_SEC;
+			printf("density_profile Time taken %d seconds %d milliseconds", msec/1000, msec%1000);
+
+			clock_t start = clock(), diff;
+			combine_densities(pM);
+			diff = clock() - start;
+			int msec = diff * 1000 / CLOCKS_PER_SEC;
+			printf("density_profile Time taken %d seconds %d milliseconds", msec/1000, msec%1000);
+
+			clock_t start = clock(), diff;
+			combine_densities(pM);
+			diff = clock() - start;
+			int msec = diff * 1000 / CLOCKS_PER_SEC;
+			printf("density_profile Time taken %d seconds %d milliseconds", msec/1000, msec%1000);
+
+    	//density_profile(pM);
+    	//ionization_rate(pM);
+    	//combine_densities(pM);
 		}
   }
 #endif
