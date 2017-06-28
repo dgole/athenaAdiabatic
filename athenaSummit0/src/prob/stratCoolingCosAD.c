@@ -1130,10 +1130,10 @@ void Userwork_in_loop(MeshS *pM)
 			printf("density_profile Time taken %d seconds %d milliseconds \n", msec1/1000, msec1%1000);
 
 			clock_t start2 = clock(), diff2;
-			combine_densities(pM);
+		  ionization_rate(pM);
 			diff2 = clock() - start2;
 			int msec2 = diff2 * 1000 / CLOCKS_PER_SEC;
-			printf("density_profile Time taken %d seconds %d milliseconds \n", msec2/1000, msec2%1000);
+			printf("ionization_rate Time taken %d seconds %d milliseconds \n", msec2/1000, msec2%1000);
 
 			clock_t start3 = clock(), diff3;
 			combine_densities(pM);
