@@ -1031,7 +1031,7 @@ void Userwork_before_loop(MeshS *pM)
 /* claculate the ionization rate profile */
     ionization_rate(pM);
     //printf("%s \n", "MARKER 9 inside Userwork_before_loop");
-    combine_densities(pM);
+    //combine_densities(pM);
     //printf("%s \n", "MARKER 10 inside Userwork_before_loop");
   }
 
