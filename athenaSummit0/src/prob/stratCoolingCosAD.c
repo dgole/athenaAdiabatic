@@ -1123,19 +1123,19 @@ void Userwork_in_loop(MeshS *pM)
 		count1 = count1 + 1;
 		if (count1 % 10 == 0) {
 
-			clock_t1 start1 = clock(), diff1;
+			clock_t start1 = clock(), diff1;
 			density_profile(pM);
 			diff1 = clock() - start1;
 			int msec1 = diff1 * 1000 / CLOCKS_PER_SEC;
 			printf("density_profile Time taken %d seconds %d milliseconds", msec1/1000, msec1%1000);
 
-			clock_t2 start2 = clock(), diff2;
+			clock_t start2 = clock(), diff2;
 			combine_densities(pM);
 			diff2 = clock() - start2;
 			int msec2 = diff2 * 1000 / CLOCKS_PER_SEC;
 			printf("density_profile Time taken %d seconds %d milliseconds", msec2/1000, msec2%1000);
 
-			clock_t3 start3 = clock(), diff3;
+			clock_t start3 = clock(), diff3;
 			combine_densities(pM);
 			diff3 = clock() - start3;
 			int msec3 = diff3 * 1000 / CLOCKS_PER_SEC;
