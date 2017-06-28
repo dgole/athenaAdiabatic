@@ -1,0 +1,25 @@
+;;; Script to calculate the z locations for various Sigma_active/Sigma_total ratios
+;;; To be used as a guide for setting up proposed runs.
+;;;
+;;; 4/24/14
+;;;
+ 
+z = findgen(100000)/100000.*8.-4.
+ratio = 0.5*erfc(z)
+plot,z,ratio
+ratio1 = 0.1
+ratio2 = 0.01
+ratio3 = 0.001
+ratio4 = 0.0001
+z1 = z(where(ratio ge 0.99*ratio1 and ratio le 1.01*ratio1))
+z2 = z(where(ratio ge 0.99*ratio2 and ratio le 1.01*ratio2))
+z3 = z(where(ratio ge 0.99*ratio3 and ratio le 1.01*ratio3))
+z4 = z(where(ratio ge 0.99*ratio4 and ratio le 1.01*ratio4))
+z1 = AVG(z1)
+z2 = AVG(z2)
+z3 = AVG(z3)
+z4 = AVG(z4)
+oplot,[z1,z1],[-100,100],linestyle=2
+oplot,[z2,z2],[-100,100],linestyle=2
+oplot,[z3,z3],[-100,100],linestyle=2
+oplot,[z4,z4],[-100,100],linestyle=2
