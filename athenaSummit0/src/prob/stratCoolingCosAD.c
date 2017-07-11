@@ -137,6 +137,8 @@ static int kbase1,kbase2;
 static int nxgrid,nygrid,nzgrid;
 static int gridnumx1,gridnumy1,gridnumz1;
 static int count1 = 0;
+static Real lastRecalcTime = 0.0;
+static Real dtRecalc = 0.05
 
 
 
@@ -1118,10 +1120,15 @@ void Userwork_in_loop(MeshS *pM)
   }}}
 
 #ifdef RESISTIVITY
+	if (count1 == 0) {
+		lastRecalcTime == pg->time;	
+	}
+	count1 = count1 + 1;
   /* user defined diffusivities from look-up tables */
   if (par_geti_def("problem","CASE",1) == 3) { /* requires CASE = 3 */
 		count1 = count1 + 1;
-		if (count1 % 10 == 0) {
+		//if (count1 % 10 == 0) {
+		if (lastRecalcTime + dtRecalc < pg->time) {
 
 			clock_t start1 = clock(), diff1;
 			density_profile(pM);
