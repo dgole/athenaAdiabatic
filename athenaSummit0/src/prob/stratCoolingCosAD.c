@@ -1121,7 +1121,7 @@ void Userwork_in_loop(MeshS *pM)
 
 #ifdef RESISTIVITY
 	if (count1 == 0) {
-		lastRecalcTime == pg->time;	
+		lastRecalcTime = pg->time;	
 	}
 	count1 = count1 + 1;
   /* user defined diffusivities from look-up tables */
