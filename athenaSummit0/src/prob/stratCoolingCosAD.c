@@ -138,7 +138,7 @@ static int nxgrid,nygrid,nzgrid;
 static int gridnumx1,gridnumy1,gridnumz1;
 static int count1 = 0;
 static Real lastRecalcTime = 0.0;
-static Real dtRecalc = 0.05
+static Real dtRecalc = 0.05;
 
 
 
