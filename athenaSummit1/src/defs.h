@@ -20,7 +20,7 @@
  *  (user modified via configure) */
 
 /* Version identifier when configure was last run */
-#define CONFIGURE_DATE "Thu Aug 31 17:51:07 MDT 2017"
+#define CONFIGURE_DATE "Fri May 12 12:26:25 MDT 2017"
 
 /* Problem generator with which Athena is compiled */
 #define A_PROBLEM "stratCoolingCosAD"

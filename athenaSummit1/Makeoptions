@@ -15,8 +15,8 @@ MACHINE = summit
 
 #-------------------  default definitions  -------------------------------------
 
-CC  = icc
-LDR = icc
+CC  = mpicc
+LDR = mpicc
 OPT = -O3
 CUSTLIBS =
 MPIINC =
@@ -110,12 +110,9 @@ ifeq ($(MACHINE),macosx)
 	FFTWINC = -I/opt/local/include
 else
 ifeq ($(MACHINE),summit)
-	#CC = mpiicc
-	#LDR = mpiicc
-	#OPT = -O3 -xCORE-AVX2 -ipo
-	CC = mpicc
-	LDR = mpicc
-	OPT = -O3
+	CC = mpiicc
+	LDR = mpiicc
+	OPT = -O3 -xCORE-AVX2 -ipo
 	MPIINC =
 	MPILIB =
 	FFTWLIB =

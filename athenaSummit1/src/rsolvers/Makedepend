@@ -1,120 +1,144 @@
-integrate.o: integrate.c ../copyright.h ../defs.h ../athena.h \
- /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
- /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
- /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h prototypes.h \
- ../copyright.h ../config.h ../prototypes.h ../copyright.h ../config.h \
- ../gravity/prototypes.h ../gravity/../copyright.h ../gravity/../config.h \
- ../microphysics/prototypes.h ../microphysics/../copyright.h \
- ../microphysics/../config.h ../particles/prototypes.h \
- ../particles/../copyright.h ../particles/../config.h \
- ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_1d_ctu.o: integrate_1d_ctu.c ../copyright.h ../defs.h ../athena.h \
+esystem_roe.o: esystem_roe.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_2d_ctu.o: integrate_2d_ctu.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+exact.o: exact.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_3d_ctu.o: integrate_3d_ctu.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+exact_sr.o: exact_sr.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_1d_vl.o: integrate_1d_vl.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+force.o: force.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_2d_vl.o: integrate_2d_vl.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+hllc.o: hllc.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_3d_vl.o: integrate_3d_vl.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+hlld.o: hlld.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_1d_vl_sr.o: integrate_1d_vl_sr.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+hllc_sr.o: hllc_sr.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_2d_vl_sr.o: integrate_2d_vl_sr.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+hlle_sr.o: hlle_sr.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
-integrate_3d_vl_sr.o: integrate_3d_vl_sr.c ../copyright.h ../defs.h ../athena.h \
+ ../reconstruction/../config.h
+hlld_sr.o: hlld_sr.c ../copyright.h ../defs.h ../athena.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
  /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
  prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
  ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
- ../gravity/../config.h ../microphysics/prototypes.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
  ../microphysics/../copyright.h ../microphysics/../config.h \
  ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
  ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
- ../reconstruction/../config.h ../rsolvers/prototypes.h \
- ../rsolvers/../copyright.h ../rsolvers/../config.h
+ ../reconstruction/../config.h
+hlle.o: hlle.c ../copyright.h ../defs.h ../athena.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
+ prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
+ ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
+ ../microphysics/../copyright.h ../microphysics/../config.h \
+ ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
+ ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
+ ../reconstruction/../config.h
+roe.o: roe.c ../copyright.h ../defs.h ../athena.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
+ prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
+ ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
+ ../microphysics/../copyright.h ../microphysics/../config.h \
+ ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
+ ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
+ ../reconstruction/../config.h hlle.c ../copyright.h
+two_shock.o: two_shock.c ../copyright.h ../defs.h ../athena.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpio.h \
+ /curc/sw/intel/16.0.3/impi/5.1.3.210/intel64/include/mpi.h ../globals.h \
+ prototypes.h ../copyright.h ../config.h ../prototypes.h ../copyright.h \
+ ../config.h ../gravity/prototypes.h ../gravity/../copyright.h \
+ ../gravity/../config.h ../integrators/prototypes.h ../integrators/../copyright.h \
+ ../integrators/../config.h ../microphysics/prototypes.h \
+ ../microphysics/../copyright.h ../microphysics/../config.h \
+ ../particles/prototypes.h ../particles/../copyright.h ../particles/../config.h \
+ ../reconstruction/prototypes.h ../reconstruction/../copyright.h \
+ ../reconstruction/../config.h
