@@ -563,11 +563,22 @@ void problem(DomainS *pDomain)
   }
 
   mass_cell = 0.0;
+  for (k=0; k<=pM->Nx[2]-1; k++) {
+	  for (k=0; k<=pM->Nx[2]-1; k++) {
+ 		  for (k=0; k<=pM->Nx[2]-1; k++) {
+			  mass_cell += pGrid->U[k][j][i].d;
+			 }
+	   }
+   }
+		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3
+    mass = mass_cell;
+
+/*  mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
     x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
     mass_cell += den*exp(-x3*x3)*pGrid->dx3;
   }
-  mass = mass_cell/Lz;
+  mass = mass_cell/Lz;*/
 
   return;
 }
@@ -687,19 +698,22 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 
   if (pM->Domain[0][0].Grid != NULL) {
 
-    Real mass_cell,Lz,den=1.0,x1,x2,x3;
+    Real mass_cell, Lx, Ly, Lz,den=1.0,x1,x2,x3;
     int k;
     GridS *pGrid;
 
     pGrid = pM->Domain[0][0].Grid;
 /* Determine mass in grid to use for mass conservation routine */
     mass_cell = 0.0;
-    Lz = pM->RootMaxX[2]-pM->RootMinX[2];
     for (k=0; k<=pM->Nx[2]-1; k++) {
-      x3 = pM->RootMinX[2] + ((Real)k + 0.5)*pGrid->dx3;
-      mass_cell += den*exp(-x3*x3)*pGrid->dx3;
+			for (k=0; k<=pM->Nx[2]-1; k++) {
+				for (k=0; k<=pM->Nx[2]-1; k++) {
+				  mass_cell += pGrid->U[k][j][i].d;
+				}
+			}
     }
-    mass = mass_cell/Lz;
+		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3
+    mass = mass_cell;
 
   }
 
