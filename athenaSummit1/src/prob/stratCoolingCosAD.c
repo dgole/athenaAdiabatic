@@ -563,10 +563,10 @@ void problem(DomainS *pDomain)
   }
 
   mass_cell = 0.0;
-  for (k=0; k<=pGrid->Nx[2]-1; k++) {
-	  for (k=0; k<=pGrid->Nx[2]-1; k++) {
- 		  for (k=0; k<=pGrid->Nx[2]-1; k++) {
-			  mass_cell += pGrid->U[k][j][i].d;
+  for (k=0; k<=pM->Nx[2]-1; k++) {
+	  for (j=0; j<=pM->Nx[1]-1; j++) {
+			for (i=0; i<=pM->Nx[0]-1; i++) {
+		  	mass_cell += pGrid->U[k][j][i].d;
 			 }
 	   }
    }
@@ -706,8 +706,8 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 /* Determine mass in grid to use for mass conservation routine */
     mass_cell = 0.0;
     for (k=0; k<=pM->Nx[2]-1; k++) {
-			for (k=0; k<=pM->Nx[2]-1; k++) {
-				for (k=0; k<=pM->Nx[2]-1; k++) {
+			for (j=0; j<=pM->Nx[1]-1; j++) {
+				for (i=0; i<=pM->Nx[0]-1; i++) {
 				  mass_cell += pGrid->U[k][j][i].d;
 				}
 			}
