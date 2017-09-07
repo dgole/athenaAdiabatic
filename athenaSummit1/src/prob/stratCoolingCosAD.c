@@ -563,14 +563,14 @@ void problem(DomainS *pDomain)
   }
 
   mass_cell = 0.0;
-  for (k=0; k<=pM->Nx[2]-1; k++) {
-	  for (k=0; k<=pM->Nx[2]-1; k++) {
- 		  for (k=0; k<=pM->Nx[2]-1; k++) {
+  for (k=0; k<=pGrid->Nx[2]-1; k++) {
+	  for (k=0; k<=pGrid->Nx[2]-1; k++) {
+ 		  for (k=0; k<=pGrid->Nx[2]-1; k++) {
 			  mass_cell += pGrid->U[k][j][i].d;
 			 }
 	   }
    }
-		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3
+		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
     mass = mass_cell;
 
 /*  mass_cell = 0.0;
@@ -712,7 +712,7 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 				}
 			}
     }
-		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3
+		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
     mass = mass_cell;
 
   }
@@ -794,7 +794,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 		}
 	} else if (z<zbtm){
 		Am = Am_FUV*rho_avg[0];
-	} else if (){
+	} else if (z > ztop){
 		Am = Am_FUV*rho_avg[pG->ke+pG->Disp[2]-nghost];
 	}
 
