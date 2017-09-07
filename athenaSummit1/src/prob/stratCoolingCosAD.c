@@ -563,9 +563,9 @@ void problem(DomainS *pDomain)
   }
 
   mass_cell = 0.0;
-  for (k=0; k<=pM->Nx[2]-1; k++) {
-	  for (j=0; j<=pM->Nx[1]-1; j++) {
-			for (i=0; i<=pM->Nx[0]-1; i++) {
+  for (k=0; k<=pGrid->Nx[2]-1; k++) {
+	  for (j=0; j<=pGrid->Nx[1]-1; j++) {
+			for (i=0; i<=pGrid->Nx[0]-1; i++) {
 		  	mass_cell += pGrid->U[k][j][i].d;
 			 }
 	   }
@@ -761,7 +761,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
   Real Am, Am_FUV, Am_base, x, y, z;
   Real ndelz = 8.;
   static int kbase1,kbase2;
-  int ki;
+  int ki, kg;
   int idisp,jdisp,i_index,j_index;
 
   for (ki=pG->ks;ki<=pG->ke;ki++){
