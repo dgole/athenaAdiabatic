@@ -572,6 +572,8 @@ void problem(DomainS *pDomain)
    }
 		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
     mass = mass_cell;
+		printf("%s %0.9G \n", "total mass: ", mass);
+		
 
 /*  mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
