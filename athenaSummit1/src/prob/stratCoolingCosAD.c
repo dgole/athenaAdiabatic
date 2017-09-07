@@ -699,7 +699,7 @@ void problem_read_restart(MeshS *pM, FILE *fp)
   if (pM->Domain[0][0].Grid != NULL) {
 
     Real mass_cell, Lx, Ly, Lz,den=1.0,x1,x2,x3;
-    int k;
+    int i, j, k;
     GridS *pGrid;
 
     pGrid = pM->Domain[0][0].Grid;
