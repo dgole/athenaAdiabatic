@@ -758,11 +758,37 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 
   cc_pos(pG,i,j,k,&x,&y,&z);
 
+	//myrho = 
+	//Am_FUV = 2.36e16*(ionfrav_FUV/1.e-5)*myrho*pow(R_AU,1.5);
+	Am_FUV = 3.3e7*(ionfrac_FUV/1.e-5)*pow(R_AU,-5./4.);
+
+	kg = k+pG->Disp[2]-nghost;
+	
+	if ((z>=zbtm) && (z<=ztop)){
+		if(z<=-(zib+delz)){
+			Am = Am_FUV*rho_avg[kg];
+		} else if (z>-zib-delz && z<-zib+ndelz*delz){
+			Am_base = Am_FUV*rho_avg[kbase1];
+			Am = (1.-erf((z+zib*0.9)/delz))*Am_base*0.5+Am0;
+		} else if (z>zit-ndelz*delz & z<=zit-ndelz*delz){
+			Am = Am0;
+		} else if (z>zit-ndelz*delz && z<zit+delz){
+			Am_base = Am_FUV*rho_avg[kbase2];
+			Am = (erf((z-zit*0.9)/delz)+1.)*Am_base*0.5+Am0;
+		} else if (z>=zit+delz){
+			Am = Am_FUV*rho_avg[kg];
+		}
+	} else if (z<zbtm){
+		Am = Am_FUV*rho_avg[0];
+	} else if (){
+		Am = Am_FUV*rho_avg[pG->ke+pG->Disp[2]-nghost];
+	}
+
 /* Here is our equation for Am in the FUV active layer */
-  Am_FUV = 3.3e7*(ionfrac_FUV/1.e-5)*pow(R_AU,-5./4.);
+  //Am_FUV = 3.3e7*(ionfrac_FUV/1.e-5)*pow(R_AU,-5./4.);
 
   // 4 new lines
-  idisp = pG->Disp[0];
+/*  idisp = pG->Disp[0];
   jdisp = pG->Disp[1];
   i_index = i+gridnumx1*2*nghost+idisp;
   j_index = j+gridnumy1*2*nghost+jdisp;
@@ -780,7 +806,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
   } else if (z >= zit+delz) {
     Am = Am_FUV*pG->U[k][j][i].d;
   }
-
+*/
 //  if (i==1 && j==1) {printf("%i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
   return Am;
 }
@@ -1130,17 +1156,17 @@ void Userwork_in_loop(MeshS *pM)
 		//if (count1 % 10 == 0) {
 		if (lastRecalcTime + dtRecalc < pG->time) {
 
-			clock_t start1 = clock(), diff1;
+			//clock_t start1 = clock(), diff1;
 			density_profile(pM);
-			diff1 = clock() - start1;
-			int msec1 = diff1 * 1000 / CLOCKS_PER_SEC;
-			printf("density_profile Time taken %d seconds %d milliseconds \n", msec1/1000, msec1%1000);
+			//diff1 = clock() - start1;
+			//int msec1 = diff1 * 1000 / CLOCKS_PER_SEC;
+			//printf("density_profile Time taken %d seconds %d milliseconds \n", msec1/1000.0, msec1%1000);
 
-			clock_t start2 = clock(), diff2;
+			//clock_t start2 = clock(), diff2;
 		  ionization_rate(pM);
-			diff2 = clock() - start2;
-			int msec2 = diff2 * 1000 / CLOCKS_PER_SEC;
-			printf("ionization_rate Time taken %d seconds %d milliseconds \n", msec2/1000, msec2%1000);
+			//diff2 = clock() - start2;
+			//int msec2 = diff2 * 1000 / CLOCKS_PER_SEC;
+			//printf("ionization_rate Time taken %d seconds %d milliseconds \n", msec2/1000, msec2%1000);
 
 			//clock_t start3 = clock(), diff3;
 			//combine_densities(pM);
