@@ -562,25 +562,44 @@ void problem(DomainS *pDomain)
 
   }
 
-  mass_cell = 0.0;
+/*  mass_cell = 0.0;
   for (k=0; k<=pGrid->Nx[2]-1; k++) {
 	  for (j=0; j<=pGrid->Nx[1]-1; j++) {
 			for (i=0; i<=pGrid->Nx[0]-1; i++) {
 		  	mass_cell += pGrid->U[k][j][i].d;
-			 }
-	   }
-   }
-		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
-    mass = mass_cell;
-		printf("%s %0.9G \n", "total mass: ", mass);
+			}
+	  }
+  }
+	mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
+  mass = mass_cell;
+	printf("%s %0.9G \n", "total mass: ", mass);
+*/
+/*
+#ifdef MPI_PARALLEL
+    ierr = MPI_Reduce(&(mtot), &(my_mtot), 1,
+           MPI_DOUBLE, MPI_SUM, 0, pD->Comm_Domain);
+#else
+    my_mtot = mtot;
+#endif
+*/
+//    if(myID_Comm_world==0){  /* I'm the parent */
+//      my_mtot /= dVol;
 		
+  mass_cell = 0.0;
+  for (k=0; k<=pDomain->Nx[2]-1; k++) {
+		mass_cell += densInit3[k]*pGrid->dx3;
+  }
+  mass = mass_cell/Lz;
+	printf("%s %0.9G \n", "total mass in initialization from old routine: ", mass);
 
-/*  mass_cell = 0.0;
+
+  mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
     x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
     mass_cell += den*exp(-x3*x3)*pGrid->dx3;
   }
-  mass = mass_cell/Lz;*/
+  mass = mass_cell/Lz;
+	printf("%s %0.9G \n", "total mass in initialization from new routine: ", mass);
 
   return;
 }
@@ -716,6 +735,7 @@ void problem_read_restart(MeshS *pM, FILE *fp)
     }
 		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
     mass = mass_cell;
+		printf("%s %0.9G \n", "total mass: ", mass);
 
   }
 
