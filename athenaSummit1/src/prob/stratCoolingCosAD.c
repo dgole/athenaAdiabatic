@@ -628,9 +628,9 @@ void problem_write_restart(MeshS *pM, FILE *fp)
 void problem_read_restart(MeshS *pM, FILE *fp)
 {
 
-	DomainS *pDomain = pM.Domain[0][0] 
+	DomainS *pDomain = pM.Domain[0][0]; 
 	GridS *pGrid = pDomain->Grid;
-	Real Lz
+	Real Lz;
 	Lz = pDomain->RootMaxX[2] - pDomain->RootMinX[2];
 
   int icool;
