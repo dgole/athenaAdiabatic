@@ -717,27 +717,63 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 
   }
 
-  if (pM->Domain[0][0].Grid != NULL) {
-
-    Real mass_cell, Lx, Ly, Lz,den=1.0,x1,x2,x3;
-    int i, j, k;
-    GridS *pGrid;
-
-    pGrid = pM->Domain[0][0].Grid;
-/* Determine mass in grid to use for mass conservation routine */
-    mass_cell = 0.0;
-    for (k=0; k<=pM->Nx[2]-1; k++) {
-			for (j=0; j<=pM->Nx[1]-1; j++) {
-				for (i=0; i<=pM->Nx[0]-1; i++) {
-				  mass_cell += pGrid->U[k][j][i].d;
-				}
-			}
-    }
-		mass_cell *= pGrid->dx1*pGrid->dx2*pGrid->dx3;
-    mass = mass_cell;
-		printf("%s %0.9G \n", "total mass: ", mass);
-
+// NEW STUFF TO GET INITIAL DENSITY AND PRESSURE PROFILES RIGHT WITH TEMPERATURE PROFILE
+  densInit1 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  tempInit1 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  densInit2 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  tempInit2 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  densInit3 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  tempInit3 = (double*)calloc_1d_array(pDomain->NGrid[2]*pGrid->Nx[2],sizeof(double));
+  // algorithm needs starting points, this is at z=0 (although there is no zone there)
+  densInit1[0] = den;
+  tempInit1[0] = Tmid;
+  // calculate entire T0 profile, regardless of actual mpi domain we are currently in
+  for (k=1; k<=pDomain->NGrid[2]*pGrid->Nx[2]/2; k++) {
+	x3 = k*pGrid->dx3;
+    if (x3<zq) {tempInit1[k]=Tatm+(Tmid-Tatm)*pow(cos(PI*x3/(2.0*zq)),2.0*delta);}
+	else {tempInit1[k]=Tatm;}
   }
+  // calculate entire density profile, regardless of actual mpi domain we are currently in
+  for (k=1; k<=pDomain->NGrid[2]*pGrid->Nx[2]/2; k++) {
+	x3 = k*pGrid->dx3;
+	densInit1[k] = densInit1[k-1]*(2.0-((x3-pGrid->dx3)*pGrid->dx3/tempInit1[k-1])-(tempInit1[k]/tempInit1[k-1]));
+  }
+  // interpolate half a cell over and re assign
+  for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]/2); k++) {
+	densInit1[k]=(densInit1[k]+densInit1[k+1])/2.0;		
+  }
+  // mirror array for -z parts of the box
+  for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]/2); k++) {
+	int ktemp=(pDomain->NGrid[2]*pGrid->Nx[2]/2)-k-1;
+ 	tempInit2[ktemp]=tempInit1[k];
+	densInit2[ktemp]=densInit1[k];
+  }
+  // combine arrays 
+  for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
+	if (k<(pDomain->NGrid[2]*pGrid->Nx[2]/2)) {	
+	  tempInit3[k]=tempInit2[k];
+	  densInit3[k]=densInit2[k];
+	}
+	else {
+	  tempInit3[k]=tempInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
+	  densInit3[k]=densInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
+	}
+  }
+  // printer loop
+  for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
+	if (myID_Comm_world==0){
+	  //printf("%i %i %i %i %i %0.9G \n", myID_Comm_world, ks, ke, pGrid->Disp[2], k, densInit3[k]);    
+  	}
+  }
+
+  mass_cell = 0.0;
+  for (k=0; k<=pDomain->Nx[2]-1; k++) {
+    x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
+    mass_cell += den*exp(-x3*x3)*pGrid->dx3;
+  }
+  mass = mass_cell/Lz;
+	printf("%s %0.9G \n", "total mass in initialization from new routine: ", mass);
+
 
   return;
 }
