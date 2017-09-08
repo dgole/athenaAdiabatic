@@ -628,6 +628,11 @@ void problem_write_restart(MeshS *pM, FILE *fp)
 void problem_read_restart(MeshS *pM, FILE *fp)
 {
 
+	DomainS *pDomain = pM.Domain[0][0] 
+	GridS *pGrid = pDomain->Grid;
+	Real Lz
+	Lz = pDomain->RootMaxX[2] - pDomain->RootMinX[2];
+
   int icool;
 
 /* Reset d_MIN to be 0.1 of D_FLOOR */
@@ -768,11 +773,10 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 
   mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
-    x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
-    mass_cell += den*exp(-x3*x3)*pGrid->dx3;
+		mass_cell += densInit3[k]*pGrid->dx3;
   }
   mass = mass_cell/Lz;
-	printf("%s %0.9G \n", "total mass in initialization from new routine: ", mass);
+	printf("%s %0.9G \n", "total mass in restart from new routine: ", mass);
 
 
   return;
