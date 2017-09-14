@@ -288,7 +288,7 @@ void problem(DomainS *pDomain)
   // printer loop
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
 		if (myID_Comm_world==0){
-	  	//printf("%i %i %i %i %i %0.9G \n", myID_Comm_world, ks, ke, pGrid->Disp[2], k, densInit3[k]);    
+	  	printf("%s %i %i %i %i %i %0.9G \n", "a" myID_Comm_world, ks, ke, pGrid->Disp[2], k, densInit3[k]);    
   	}
   }
 
@@ -311,7 +311,7 @@ void problem(DomainS *pDomain)
 		  if (rp < P_FLOOR) {rp = P_FLOOR;}
 		#endif
 		if (i==is && j==js){
-		  printf("%i %i %i %i %i %i %0.9G %0.9G \n", myID_Comm_world, ks, ke, pGrid->Disp[2], k, k+pGrid->Disp[2]-nghost, x3, rd);
+		  printf("%s %i %i %i %i %i %i %0.9G %0.9G \n", "b" myID_Comm_world, ks, ke, pGrid->Disp[2], k, k+pGrid->Disp[2]-nghost, x3, rd);
 		}
 
 /* To conform to HGB, the perturbations to V/Cs are (1/5)amp/sqrt(Gamma)  */
