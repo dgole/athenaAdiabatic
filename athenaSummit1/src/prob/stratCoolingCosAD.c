@@ -639,6 +639,7 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 	int i, j, k;
 	Real x1, x2, x3;
 	Real mass_cell;
+	Real pres, den; 
 
 
 
