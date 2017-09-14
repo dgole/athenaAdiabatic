@@ -627,12 +627,19 @@ void problem_write_restart(MeshS *pM, FILE *fp)
 void problem_read_restart(MeshS *pM, FILE *fp)
 {
 
-	DomainS *pDomain = pM->Domain[0][0]; 
-	GridS *pGrid = pDomain->Grid;
+  GridS *pGrid;
+  DomainS *pDomain;
+  
+	pDomain = (DomainS*)&(pM->Domain[0][0]);
+  pGrid = pM->Domain[0][0].Grid;
+
 	Real Lz;
 	Lz = pDomain->RootMaxX[2] - pDomain->RootMinX[2];
-
   int icool;
+
+
+
+
 
 /* Reset d_MIN to be 0.1 of D_FLOOR */
   D_FLOOR = par_getd("problem","dfloor");
