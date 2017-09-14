@@ -255,48 +255,48 @@ void problem(DomainS *pDomain)
   tempInit1[0] = Tmid;
   // calculate entire T0 profile, regardless of actual mpi domain we are currently in
   for (k=1; k<=pDomain->NGrid[2]*pGrid->Nx[2]/2; k++) {
-	x3 = k*pGrid->dx3;
+		x3 = k*pGrid->dx3;
     if (x3<zq) {tempInit1[k]=Tatm+(Tmid-Tatm)*pow(cos(PI*x3/(2.0*zq)),2.0*delta);}
-	else {tempInit1[k]=Tatm;}
+		else {tempInit1[k]=Tatm;}
   }
   // calculate entire density profile, regardless of actual mpi domain we are currently in
   for (k=1; k<=pDomain->NGrid[2]*pGrid->Nx[2]/2; k++) {
-	x3 = k*pGrid->dx3;
-	densInit1[k] = densInit1[k-1]*(2.0-((x3-pGrid->dx3)*pGrid->dx3/tempInit1[k-1])-(tempInit1[k]/tempInit1[k-1]));
+		x3 = k*pGrid->dx3;
+		densInit1[k] = densInit1[k-1]*(2.0-((x3-pGrid->dx3)*pGrid->dx3/tempInit1[k-1])-(tempInit1[k]/tempInit1[k-1]));
   }
   // interpolate half a cell over and re assign
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]/2); k++) {
-	densInit1[k]=(densInit1[k]+densInit1[k+1])/2.0;		
+		densInit1[k]=(densInit1[k]+densInit1[k+1])/2.0;		
   }
   // mirror array for -z parts of the box
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]/2); k++) {
-	int ktemp=(pDomain->NGrid[2]*pGrid->Nx[2]/2)-k-1;
- 	tempInit2[ktemp]=tempInit1[k];
-	densInit2[ktemp]=densInit1[k];
+		int ktemp=(pDomain->NGrid[2]*pGrid->Nx[2]/2)-k-1;
+ 		tempInit2[ktemp]=tempInit1[k];
+		densInit2[ktemp]=densInit1[k];
   }
   // combine arrays 
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
-	if (k<(pDomain->NGrid[2]*pGrid->Nx[2]/2)) {	
-	  tempInit3[k]=tempInit2[k];
-	  densInit3[k]=densInit2[k];
-	}
-	else {
-	  tempInit3[k]=tempInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
-	  densInit3[k]=densInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
-	}
+		if (k<(pDomain->NGrid[2]*pGrid->Nx[2]/2)) {	
+	  	tempInit3[k]=tempInit2[k];
+	 		densInit3[k]=MAX(densInit2[k],D_FLOOR);
+		}
+		else {
+	  	tempInit3[k]=tempInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
+	 		densInit3[k]=MAX(densInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)],D_FLOOR);
+		}
   }
   // printer loop
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
-	if (myID_Comm_world==0){
-	  //printf("%i %i %i %i %i %0.9G \n", myID_Comm_world, ks, ke, pGrid->Disp[2], k, densInit3[k]);    
+		if (myID_Comm_world==0){
+	  	//printf("%i %i %i %i %i %0.9G \n", myID_Comm_world, ks, ke, pGrid->Disp[2], k, densInit3[k]);    
   	}
   }
 
 
   for (k=ks; k<=ke; k++) {
-  for (j=js; j<=je; j++) {
-    for (i=is; i<=ie; i++) {
-      cc_pos(pGrid,i,j,k,&x1,&x2,&x3);
+ 	 for (j=js; j<=je; j++) {
+ 	   for (i=is; i<=ie; i++) {
+  	   cc_pos(pGrid,i,j,k,&x1,&x2,&x3);
 	  
 /* Initialize perturbations
  *  ipert = 1 - random perturbations to P and V [default, used by HGB]
@@ -587,16 +587,15 @@ void problem(DomainS *pDomain)
 		
   mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
-		mass_cell += densInit3[k]*pGrid->dx3;
+    x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
+    mass_cell += den*exp(-x3*x3)*pGrid->dx3;
   }
   mass = mass_cell/Lz;
 	printf("%s %0.9G \n", "total mass in initialization from old routine: ", mass);
 
-
   mass_cell = 0.0;
   for (k=0; k<=pDomain->Nx[2]-1; k++) {
-    x3 = pDomain->MinX[2] + ((Real)k + 0.5)*pGrid->dx3;
-    mass_cell += den*exp(-x3*x3)*pGrid->dx3;
+		mass_cell += densInit3[k]*pGrid->dx3;
   }
   mass = mass_cell/Lz;
 	printf("%s %0.9G \n", "total mass in initialization from new routine: ", mass);
@@ -628,7 +627,7 @@ void problem_write_restart(MeshS *pM, FILE *fp)
 void problem_read_restart(MeshS *pM, FILE *fp)
 {
 
-	DomainS *pDomain = pM.Domain[0][0]; 
+	DomainS *pDomain = pM->Domain[0][0]; 
 	GridS *pGrid = pDomain->Grid;
 	Real Lz;
 	Lz = pDomain->RootMaxX[2] - pDomain->RootMinX[2];
@@ -757,11 +756,11 @@ void problem_read_restart(MeshS *pM, FILE *fp)
   for (k=0; k<(pDomain->NGrid[2]*pGrid->Nx[2]); k++) {
 	if (k<(pDomain->NGrid[2]*pGrid->Nx[2]/2)) {	
 	  tempInit3[k]=tempInit2[k];
-	  densInit3[k]=densInit2[k];
+	  densInit3[k]=MAX(densInit2[k],D_FLOOR);
 	}
 	else {
 	  tempInit3[k]=tempInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
-	  densInit3[k]=densInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)];
+	  densInit3[k]=MAX(densInit1[k-(pDomain->NGrid[2]*pGrid->Nx[2]/2)],D_FLOOR);
 	}
   }
   // printer loop
