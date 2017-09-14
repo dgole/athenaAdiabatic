@@ -636,6 +636,9 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 	Real Lz;
 	Lz = pDomain->RootMaxX[2] - pDomain->RootMinX[2];
   int icool;
+	int i, j, k;
+	Real x1, x2, x3;
+	Real mass_cell;
 
 
 
@@ -656,6 +659,7 @@ void problem_read_restart(MeshS *pM, FILE *fp)
   Sig_FUV = par_getd("problem","Sig_FUV");
   ionfrac_FUV = par_getd("problem","ionfrac_FUV");
 
+
 #ifdef ADIABATIC
   icool = par_geti_def("problem","icool", 0);
   if (icool==2) {
@@ -675,6 +679,9 @@ void problem_read_restart(MeshS *pM, FILE *fp)
 	CoolingFunc = NoCoolingFunc;
   }
 #endif /*ADIABATIC*/
+
+  pres = par_getd("problem","pres");
+	den=pres/Tmid;
 
 /* With viscosity and/or resistivity, read eta_Ohm and nu_V */
 #ifdef RESISTIVITY
