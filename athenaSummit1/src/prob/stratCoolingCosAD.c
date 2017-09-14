@@ -898,6 +898,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
   }
 */
 //  if (i==1 && j==1) {printf("%i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
+	printf("%i %0.9G %0.9G \n", k, z, Am);
   return Am;
 }
 
