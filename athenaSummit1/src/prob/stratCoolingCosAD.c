@@ -836,17 +836,16 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 {
   Real Am, Am_FUV, Am_base, x, y, z;
   Real ndelz = 8.;
-  static int kbase1,kbase2;
   int ki, kg;
   int idisp,jdisp,i_index,j_index;
 
-  for (ki=pG->ks;ki<=pG->ke;ki++){
+/*  for (ki=pG->ks;ki<=pG->ke;ki++){
     cc_pos(pG,i,j,ki,&x,&y,&z);
 		if (i==0 && j==0 && k==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);}
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
   }
-	kbase1 = 33; kbase2 = 53;
+	kbase1 = 33; kbase2 = 53;*/
 
   cc_pos(pG,i,j,k,&x,&y,&z);
 	if (i==0 && j==0 && k==0) {printf("%s %i %i %0.9G %0.9G %0.9G %i %i\n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit, kbase1, kbase2);}
@@ -1100,6 +1099,12 @@ static void ionization_rate(MeshS *pM)
 /* Make zit and zib both positive numbers */
   zib = fabs(zib);
   zit = fabs(zit);
+
+  for (k=0;k<=pM->Nx[2];k++){
+    z = pM->RootMinX[2] + (k + 0.5)*pG->dx3;
+    if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = k;
+    if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = k;
+  }
 
 
 /*-------------- calculate the ionization rate --------------
