@@ -861,7 +861,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 		} else if (z>-zib-delz && z<-zib+ndelz*delz){
 			Am_base = Am_FUV*rho_avg[kbase1];
 			Am = (1.-erf((z+zib*0.9)/delz))*Am_base*0.5+Am0;
-		} else if (z>zit-ndelz*delz & z<=zit-ndelz*delz){
+		} else if (z>=-zib+ndelz*delz & z<=zit-ndelz*delz){
 			Am = Am0;
 		} else if (z>zit-ndelz*delz && z<zit+delz){
 			Am_base = Am_FUV*rho_avg[kbase2];
