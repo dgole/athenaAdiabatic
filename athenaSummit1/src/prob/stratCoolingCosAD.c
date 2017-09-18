@@ -943,7 +943,7 @@ static Real mass_cons(MeshS *pM)
 
       /* calculate the mass conversion ratio */
       mratio = mass / my_mtot;
-			  if (i==0 && j==0) {printf("%s %0.9G \n", "Mass Cons", mratio);}
+			printf("%s %0.9G \n", "Mass Cons", mratio);
 		
     }
   }
