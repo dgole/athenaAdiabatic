@@ -848,7 +848,6 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 	kbase1 = 33; kbase2 = 53;*/
 
   cc_pos(pG,i,j,k,&x,&y,&z);
-	if (i==0 && j==0 && k==0) {printf("%s %i %i %0.9G %0.9G %0.9G %i %i\n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit, kbase1, kbase2);}
 
 	//myrho = 
 	//Am_FUV = 2.36e16*(ionfrav_FUV/1.e-5)*myrho*pow(R_AU,1.5);
@@ -899,7 +898,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
     Am = Am_FUV*pG->U[k][j][i].d;
   }
 */
-  //if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
+  if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
 	//Am = 1000.0;
   return Am;
 }
