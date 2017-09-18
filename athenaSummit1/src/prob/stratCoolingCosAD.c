@@ -898,7 +898,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
     Am = Am_FUV*pG->U[k][j][i].d;
   }
 */
-  if (i==0 && j==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, kg, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
+  //if (i==0 && j==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, kg, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
 	//Am = 1000.0;
   return Am;
 }
@@ -1105,7 +1105,7 @@ static void ionization_rate(MeshS *pM)
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = k;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = k;
   }
-  printf("%s %i %0.9G %0.9G %i %i \n", "ionization rate ", myID_Comm_world, zib, zit, kbase1, kbase2);
+  //printf("%s %i %0.9G %0.9G %i %i \n", "ionization rate ", myID_Comm_world, zib, zit, kbase1, kbase2);
 
 /*-------------- calculate the ionization rate --------------
  */
