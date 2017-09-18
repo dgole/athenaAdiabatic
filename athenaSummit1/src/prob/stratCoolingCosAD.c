@@ -842,7 +842,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 
   for (ki=pG->ks;ki<=pG->ke;ki++){
     cc_pos(pG,i,j,ki,&x,&y,&z);
-		if (i==0 && j==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);}
+		if (i==0 && j==0 && myID_Comm_world==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);}
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
   }
