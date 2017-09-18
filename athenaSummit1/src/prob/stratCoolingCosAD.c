@@ -840,12 +840,13 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
   int ki, kg;
   int idisp,jdisp,i_index,j_index;
 
-  //for (ki=pG->ks;ki<=pG->ke;ki++){
-  for (ki=0;ki<=80;ki++){
+  for (ki=pG->ks;ki<=pG->ke;ki++){
     cc_pos(pG,i,j,ki,&x,&y,&z);
+		if (i==0 && j==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
   }
+	if (i==0 && j==0) {printf("%s %i %i %i %0.9G %0.9G \n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit);
 
   cc_pos(pG,i,j,k,&x,&y,&z);
 
@@ -898,8 +899,8 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
     Am = Am_FUV*pG->U[k][j][i].d;
   }
 */
-  if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
-	Am = 1000.0;
+  //if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
+	//Am = 1000.0;
   return Am;
 }
 
@@ -1034,6 +1035,7 @@ static void density_profile(MeshS *pM)
 
   free_1d_array(my_rho);
   free_1d_array(g_rho);
+
 #endif
   return;
 }
@@ -1097,6 +1099,7 @@ static void ionization_rate(MeshS *pM)
 /* Make zit and zib both positive numbers */
   zib = fabs(zib);
   zit = fabs(zit);
+
 
 /*-------------- calculate the ionization rate --------------
  */
