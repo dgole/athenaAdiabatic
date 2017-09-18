@@ -842,13 +842,13 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
 
   for (ki=pG->ks;ki<=pG->ke;ki++){
     cc_pos(pG,i,j,ki,&x,&y,&z);
-		if (i==0 && j==0 && myID_Comm_world==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);}
+		if (i==0 && j==0 && k==0) {printf("%s %i %i %i %0.9G %0.9G %0.9G \n", "get_Am_FUV a ", myID_Comm_world, k, ki, z, zib, zit);}
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
   }
 
   cc_pos(pG,i,j,k,&x,&y,&z);
-	if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %i %i\n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit, kbase1, kbase2);}
+	if (i==0 && j==0 && k==0) {printf("%s %i %i %0.9G %0.9G %0.9G %i %i\n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit, kbase1, kbase2);}
 
 	//myrho = 
 	//Am_FUV = 2.36e16*(ionfrav_FUV/1.e-5)*myrho*pow(R_AU,1.5);
