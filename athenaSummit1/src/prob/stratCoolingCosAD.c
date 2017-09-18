@@ -1100,6 +1100,7 @@ static void ionization_rate(MeshS *pM)
   zib = fabs(zib);
   zit = fabs(zit);
 
+	Real z;
   for (k=0;k<=pM->Nx[2];k++){
     z = pM->RootMinX[2] + (k + 0.5)*pG->dx3;
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = k;
