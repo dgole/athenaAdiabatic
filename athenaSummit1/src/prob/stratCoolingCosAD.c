@@ -846,6 +846,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
   }
+	kbase1 = 33; kbase2 = 53;
 
   cc_pos(pG,i,j,k,&x,&y,&z);
 	if (i==0 && j==0 && k==0) {printf("%s %i %i %0.9G %0.9G %0.9G %i %i\n", "get_Am_FUV b ", myID_Comm_world, k, z, zib, zit, kbase1, kbase2);}
