@@ -897,7 +897,7 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
     Am = Am_FUV*pG->U[k][j][i].d;
   }
 */
-  if (i==1 && j==1) {printf("%s %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
+  if (i==0 && j==0) {printf("%s %i %i %0.9G %0.9G %0.9G %0.9G %0.9G %0.9G %i %i %0.9G \n", "get_Am_FUV", myID_Comm_world, k, z, Am, zib, zit, delz, ndelz, kbase1, kbase2, ionfrac_FUV);}
   return Am;
 }
 
@@ -943,6 +943,8 @@ static Real mass_cons(MeshS *pM)
 
       /* calculate the mass conversion ratio */
       mratio = mass / my_mtot;
+			  if (i==0 && j==0) {printf("%s %0.9G \n", "Mass Cons", mratio);}
+		
     }
   }
 
