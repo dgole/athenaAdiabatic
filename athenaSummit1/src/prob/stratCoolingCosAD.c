@@ -840,7 +840,8 @@ static Real get_Am_FUV(const GridS *pG, const int i, const int j, const int k, c
   int ki, kg;
   int idisp,jdisp,i_index,j_index;
 
-  for (ki=pG->ks;ki<=pG->ke;ki++){
+  //for (ki=pG->ks;ki<=pG->ke;ki++){
+  for (ki=0;ki<=80;ki++){
     cc_pos(pG,i,j,ki,&x,&y,&z);
     if (z > -zib-delz && z <= -zib-delz+pG->dx3) kbase1 = ki;
     if (z < zit+delz && z >= zit+delz-pG->dx3) kbase2 = ki;
