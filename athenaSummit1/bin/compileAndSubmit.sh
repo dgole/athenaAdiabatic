@@ -2,10 +2,7 @@
 domx=$1    
 domy=$2    
 domz=$3          
-res=$4        
-codeTimeLim=$5
-cycleLim=$6
-wallTime=$7    
+wallTime=$4    
 
 np=$((domx*domy*domz))
 nnodes=$(((np-1) / 24 + 1))
@@ -28,8 +25,8 @@ chmod +x summitScript.sh
 ./summitScript.sh   athena_$np    athinput.txt         $nnodes  $np normal  $wallTime   
 
 # make the input file
-rm athinput.txt
-./makeAthinput.sh $1 $2 $3 $4 $5 $6
+#rm athinput.txt
+#./makeAthinput.sh $1 $2 $3 $4 $5 $6
 
 # submit the job to SLURM
 chmod +x job.sh

@@ -31,7 +31,7 @@ module load intel impi cuda
 #./athena -i $2
 #mpirun -np $4 ./athena -i $2 
 mpirun -genv I_MPI_FABRICS=shm:tmi -genv I_MPI_TMI_PROVIDER=psm2 -genv I_MPI_DEBUG=5 -np $4 ./athena -i $2
-
+#mpirun -genv I_MPI_FABRICS=shm:tmi -genv I_MPI_TMI_PROVIDER=psm2 -genv I_MPI_DEBUG=5 -np $4 ./athena -r ./rst/StratCooling.0010.rst -i $2
 
 # End of example job shell script
 #
